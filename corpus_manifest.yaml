@@ -1,0 +1,201 @@
+# DecisionOps Corpus Integrity Manifest
+
+manifest_version: 1.6
+status: approved
+owner: DecisionOps Architecture
+purpose: Machine-readable integrity definition of the DecisionOps documentation corpus
+repository_location: corpus/00_governance/freeze-manifest
+created: 2026-03-15
+edit_history:
+  - "2026-03-15 v0 Initial Draft"
+  - "2026-03-15 v1.0 Approved"
+  - "2026-03-21 v1.1 Added ci and project_instructions to 00_governance; renamed enterprise-ai-workplace to enterprise_ai_workplace and added threat_landscape to 04_intelligence; added white_paper to 10_branding_and_marketing; updated registered_core_documents catalogue version"
+  - "2026-03-21 v1.2 Registered document_retirement_policy.md in 00_governance/policies"
+  - "2026-03-21 v1.3 Removed imagery subfolders (png, social, svg) from 10_branding_and_marketing/branding; branding retained as document folder"
+  - "2026-03-22 v1.4 Added Group 2 governance files to registered_core_documents; updated catalogue version to 2.2; updated project instructions version to 1.1"
+  - "2026-03-22 v1.5 All taxonomy paths prefixed corpus/ per ADR-048; corpus_manifest repository_location updated; registered_core_documents locations updated"
+  - "2026-03-25 v1.6 Registered architecture_session_context.md in corpus/01_architecture/platform; registered ADR-049; updated registered_core_documents catalogue version to 2.9 and project instructions version to 1.6"
+
+corpus:
+  name: DecisionOps Corpus
+  root: corpus
+
+  top_level_folders:
+    - corpus/00_governance
+    - corpus/01_architecture
+    - corpus/02_schemas
+    - corpus/03_api
+    - corpus/04_intelligence
+    - corpus/05_security
+    - corpus/06_operations
+    - corpus/07_reference
+    - corpus/08_strategy
+    - corpus/09_sources
+    - corpus/10_branding_and_marketing
+    - corpus/11_development_process
+
+  structure:
+
+    corpus/00_governance:
+      - adr
+      - catalogue:
+        - _retired
+      - ci
+      - freeze-manifest
+      - governance-model
+      - policies
+      - project_instructions
+
+    corpus/01_architecture:
+      - context-map
+      - domain-model
+      - platform
+      - positioning
+      - runtime
+      - specification
+      - subsystems
+      - threat-models
+      - trust
+
+    corpus/02_schemas:
+      - capability
+      - connector
+      - governance
+      - prompt
+      - provenance
+
+    corpus/03_api:
+      - admin
+      - connectors
+      - control-plane
+
+    corpus/04_intelligence:
+      - ecosystem
+      - enterprise_ai_workplace
+      - market
+      - regulatory
+      - threat_landscape
+
+    corpus/05_security:
+      - controls
+      - runtime-security
+      - threat-model
+
+    corpus/06_operations:
+      - deployment
+      - governance-packs
+      - rollback
+
+    corpus/07_reference:
+      - acronyms
+      - taxonomy
+      - terminology
+
+    corpus/08_strategy:
+      - investor
+      - positioning
+      - roadmap
+
+    corpus/09_sources:
+      - adr
+      - external research
+      - sdd research
+      - uploaded papers
+
+    corpus/10_branding_and_marketing:
+      - branding
+      - notebooklm
+      - white_paper
+
+    corpus/11_development_process:
+      - ai_sdd_evaluation
+
+registered_core_documents:
+
+  - name: corpus_catalogue.md
+    location: corpus/00_governance/catalogue
+    status: approved
+    version: 2.9
+
+  - name: corpus_manifest.yaml
+    location: corpus/00_governance/freeze-manifest
+    status: approved
+    version: 1.5
+
+  - name: decisionops_project_instructions.md
+    location: corpus/00_governance/project_instructions
+    status: approved
+    version: 1.6
+
+  - name: decisionops_repository_migration_map.md
+    location: corpus/00_governance/project_instructions
+    status: approved
+    version: 1.0
+
+  - name: decisionops_ci_documentation_guard.md
+    location: corpus/00_governance/ci
+    status: draft
+    version: 0.1
+
+  - name: document_retirement_policy.md
+    location: corpus/00_governance/policies
+    status: approved
+    version: 1.3
+
+  - name: markdown_canonical_source_policy.md
+    location: corpus/00_governance/policies
+    status: approved
+    version: 1.0
+
+  - name: documentation_versioning_policy.md
+    location: corpus/00_governance/policies
+    status: approved
+    version: 1.0
+
+  - name: baseline_freeze_and_release_policy.md
+    location: corpus/00_governance/policies
+    status: approved
+    version: 1.0
+
+  - name: corpus_governance_enforcement_policy.md
+    location: corpus/00_governance/policies
+    status: draft
+    version: 0
+
+  - name: documentation_lifecycle_and_cur_policy.md
+    location: corpus/00_governance/governance-model
+    status: approved
+    version: 1.0
+
+  - name: adr_index_and_status_register.md
+    location: corpus/00_governance/adr
+    status: approved
+    version: 1.1
+
+  - name: decisionops_adr_taxonomy_map.md
+    location: corpus/00_governance/adr
+    status: approved
+    version: 1.0
+
+  - name: terminology_and_naming_governance.md
+    location: corpus/07_reference/terminology
+    status: approved
+    version: 1.0
+
+  - name: README.md
+    location: Corpus Root
+    status: approved
+    version: 1.1
+
+  - name: architecture_session_context.md
+    location: corpus/01_architecture/platform
+    status: approved
+    version: 1.0
+
+notes:
+  - "The manifest represents the expected structural state of the documentation corpus."
+  - "All corpus taxonomy folders (00_governance through 11_development_process) are located under corpus/ at repository root per ADR-048."
+  - "CI validation must fail if numbered taxonomy folders are found outside corpus/."
+  - "docs/ is reserved for platform operational, support, and user documentation only."
+  - "CI validation should compare repository structure against this manifest."
+  - "The catalogue remains the authoritative inventory of all documents."
