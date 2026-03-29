@@ -1,7 +1,7 @@
 # DecisionOps Project Instructions
 
 **Status**: Approved
-**Version**: 1.6
+**Version**: 1.7
 **Purpose**: Defines the operational rules and architectural governance model for AI assistants working on the DecisionOps platform.
 **Doc Repository Location**: corpus/00_governance/project_instructions
 **Create Date**: 2026-03-16
@@ -14,6 +14,7 @@
 **2026-03-24** v1.4 Updated Section 17 session start — load project instructions from project knowledge rather than direct repository fetch (private repository constraint)
 **2026-03-24** v1.5  Added Section 24: Project Knowledge Sync Rule — repo-first update discipline, conflict resolution, governed file list, and session start version check
 **2026-03-25** v1.6  Added Section 25: Session Boundary Triggers and Architectural Context; updated Section 17 Step 5 for architecture session context bootstrap
+**2026-03-28** v1.7  Section 23 amended: accepted claude/ branch prefix convention; Section 24.3 amended: added architecture_session_context.md to governed files table
 
 -----
 
@@ -23,15 +24,11 @@ These instructions define the governance rules used by AI assistants operating w
 
 Primary Repository Authority
 
-
 decisionops-platform
-
 
 Authoritative Architecture Source
 
-
 DecisionOps Architecture Corpus
-
 
 Documentation Governance Sources
 
@@ -41,9 +38,7 @@ Documentation Governance Sources
 
 Architecture Change Authority
 
-
 00_governance/adr
-
 
 Applicable AI Agents
 
@@ -195,7 +190,6 @@ DecisionOps development follows strict **Spec‑Driven Development (SDD)**.
 
 Development order:
 
-
 Architecture Specification
 ↓
 Schema Definition
@@ -203,7 +197,6 @@ Schema Definition
 Implementation
 ↓
 Testing
-
 
 Implementation must never precede an approved specification.
 
@@ -233,7 +226,6 @@ The DecisionOps documentation system is governed by three canonical artefacts:
 
 Governance hierarchy:
 
-
 Corpus Manifest
 ↓
 CI Validation
@@ -241,7 +233,6 @@ CI Validation
 Repository Structure
 ↓
 Corpus Catalogue
-
 
 The **Corpus Manifest** defines the machine‑authoritative repository structure.
 
@@ -253,9 +244,7 @@ The **Corpus Catalogue** is a human‑readable index and must not define structu
 
 All documentation corpus structural changes must begin with:
 
-
 corpus_manifest.yaml
-
 
 Required workflow:
 
@@ -312,9 +301,7 @@ CI must fail if:
 
 All terminology must align with the canonical reference located in:
 
-
 07_reference/terminology
-
 
 Terminology updates are permitted as the platform evolves.
 
@@ -445,17 +432,18 @@ Before any change to the DecisionOps repository is issued to Claude Code, the as
 
 1. Review all files affected by the proposed change — new, modified, or deleted
 2. Produce a complete PFS sync list identifying:
+
 - Files to be **replaced** in the PFS (with the updated version)
 - Files to be **added** to the PFS (new files)
 - Files to be **removed** from the PFS (deleted files)
-3. The PFS must be fully updated and confirmed before the Claude Code instruction is issued
+
+1. The PFS must be fully updated and confirmed before the Claude Code instruction is issued
 
 **Hard gate**
 
 No repository change may proceed to Claude Code until the PFS sync list has been produced, reviewed, and the PFS updated accordingly.
 
 **Sequence**
-
 
 Corpus change agreed
 ↓
@@ -466,7 +454,6 @@ PFS updated and confirmed by user
 Claude Code instruction issued
 ↓
 Commit / PR raised
-
 
 **Scope**
 
@@ -488,7 +475,6 @@ All Claude Code instructions must specify a branch name. Claude Code must use th
 
 Every Claude Code instruction must include a Branch Governance block immediately after the instruction header:
 
-
 Branch Governance
 
 Required branch: [BRANCH NAME]
@@ -508,21 +494,19 @@ session IDs, or random strings to the branch name. If you cannot
 check out or create the specified branch, stop and report the
 reason before proceeding.
 
-
 **Branch naming convention**
 
 Corpus and governance changes:
 
-
 governance/[short-description]
-
+claude/[short-description]
 
 Platform source code changes:
-
 
 feat/[short-description]
 fix/[short-description]
 
+**Accepted prefix:** The `claude/` prefix is accepted as equivalent to `governance/` for corpus and governance changes. Both are valid. Instructions from the architecture assistant may use either prefix. The prefix used in a given instruction must match the branch name exactly.
 
 **Enforcement**
 
@@ -562,11 +546,12 @@ immediately on discovery of a conflict.
 The following files are maintained in project knowledge and are subject
 to this rule:
 
-|Project knowledge file               |Corpus repository path                                                  |
-|-------------------------------------|------------------------------------------------------------------------|
+|Project knowledge file             |Corpus repository path                                                |
+|-----------------------------------|----------------------------------------------------------------------|
 |decisionops_project_instructions.md|00_governance/project_instructions/decisionops_project_instructions.md|
 |decisionops_corpus_catalogue.md    |00_governance/catalogue/decisionops_corpus_catalogue.md               |
 |corpus_manifest.yaml               |00_governance/freeze-manifest/corpus_manifest.yaml                    |
+|architecture_session_context.md    |corpus/01_architecture/platform/architecture_session_context.md       |
 
 This list is authoritative. Files may only be added to or removed from
 project knowledge if they appear in this table.
@@ -596,7 +581,9 @@ rules to maintain coherent design decisions across sessions. This context
 is provided by a dedicated document maintained in both the corpus
 repository and project knowledge:
 
-    corpus/01_architecture/platform/architecture_session_context.md
+```
+corpus/01_architecture/platform/architecture_session_context.md
+```
 
 This document is the authoritative summary of the current architectural
 state of the DecisionOps Platform. It is specifically maintained to give
@@ -638,7 +625,7 @@ are met:
 1. The session has been active for more than three hours
 2. A major PR has been raised, reviewed, and merged during the session
 3. Work is shifting from one platform layer to a materially different one
-4. The assistant's responses feel less precise or require more
+4. The assistant’s responses feel less precise or require more
    clarification than earlier in the session
 
 ## 25.4 Assistant Self-Monitoring
@@ -646,7 +633,9 @@ are met:
 The assistant must proactively flag when it believes a session boundary
 is appropriate. The flag must be explicit:
 
-    SESSION BOUNDARY RECOMMENDED — [reason]
+```
+SESSION BOUNDARY RECOMMENDED — [reason]
+```
 
 The project owner makes the final decision on whether to proceed or start
 a new session. The assistant must not suppress this flag to avoid

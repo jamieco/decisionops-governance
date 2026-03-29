@@ -1,6 +1,6 @@
 # DecisionOps Corpus Catalogue
 
-**Version:** 2.9
+**Version:** 3.0
 **Status:** Approved (awaiting verification)
 **Owner:** DecisionOps Architecture
 **Purpose:** Provide the authoritative inventory and structural definition of the DecisionOps documentation corpus aligned to the approved corpus taxonomy.
@@ -30,6 +30,7 @@
 **2026-03-24** v2.7  Updated decisionops_project_instructions.md version field from v1.2 to v1.4; added Section 10 deferred catalogue retirement reconciliation per Section 19 of project instructions
 **2026-03-24** v2.8  Project Instructions corrected to v1.5 (Section 24 post-merge catalogue patch); Corpus Catalogue self-reference corrected from v2.5 to v2.8
 **2026-03-25** v2.9  Registered ADR-049 and architecture_session_context.md; project instructions updated to v1.6; manifest updated to v1.6; registered decisionops-governance public repository reference
+**2026-03-28** v3.0  Security Runtime Architecture approved and registered in corpus/05_security/runtime; removed from missing documents register; runtime-security renamed to runtime throughout; architecture session context updated to v1.1; project instructions updated to v1.7; manifest updated to v1.7; ADR-050 registered; two strategic flag documents registered; catalogue self-reference corrected from v2.8 to v3.0
 
 -----
 
@@ -94,7 +95,7 @@ decisionops-platform/
 │   │   └── threat_landscape
 │   ├── 05_security
 │   │   ├── controls
-│   │   ├── runtime-security
+│   │   ├── runtime
 │   │   └── threat-model
 │   ├── 06_operations
 │   │   ├── deployment
@@ -178,7 +179,7 @@ DecisionOps_Corpus:
 
   corpus/05_security:
     - controls
-    - runtime-security
+    - runtime
     - threat-model
 
   corpus/06_operations:
@@ -300,7 +301,7 @@ Security architecture, threat modelling inputs and defensive architecture.
 Subfolders
 
 - controls
-- runtime-security
+- runtime
 - threat-model
 
 -----
@@ -319,7 +320,7 @@ Subfolders
 
 ### corpus/07_reference
 
-Acronyms, taxonomy and terminology reference materials.
+Reference materials, terminology and taxonomy definitions.
 
 Subfolders
 
@@ -331,7 +332,7 @@ Subfolders
 
 ### corpus/08_strategy
 
-Strategic positioning documents, investor narratives and platform direction.
+Strategic positioning, roadmap and investor materials.
 
 Subfolders
 
@@ -343,7 +344,7 @@ Subfolders
 
 ### corpus/09_sources
 
-Uploaded external research artefacts and reference materials.
+External research, source documents and reference materials.
 
 Subfolders
 
@@ -356,7 +357,7 @@ Subfolders
 
 ### corpus/10_branding_and_marketing
 
-Brand assets, marketing materials and visual identity resources.
+Brand assets, marketing materials and NotebookLM sources.
 
 Subfolders
 
@@ -364,13 +365,11 @@ Subfolders
 - notebooklm
 - white_paper
 
-Note: imagery assets (png, svg, social) have been removed from the corpus. The `branding` subfolder is reserved for brand governance documents (guidelines, standards, frameworks).
-
 -----
 
 ### corpus/11_development_process
 
-Development process documentation including SDD workflows and evaluation frameworks.
+Development process documentation and SDD evaluation materials.
 
 Subfolders
 
@@ -378,51 +377,11 @@ Subfolders
 
 -----
 
-### External Repositories
-
-| Repository | URL | Purpose |
-|---|---|---|
-| decisionops-governance | https://github.com/jamieco/decisionops-governance | Public governance interface — bootstrap verification files |
-
------
-
-# 5. Corpus Validation Rules
-
-To maintain structural integrity the DecisionOps documentation corpus follows explicit validation rules.
-
-**Rule 1 — Catalogue Registration**
-
-Every governed document must appear in the **DecisionOps Corpus Catalogue**.
-
-**Rule 2 — Catalogue Resolution**
-
-Every catalogue entry must resolve to a real document in the repository at the location defined by the *Doc Repository Location* field.
-
-**Rule 3 — Metadata Consistency**
-
-Document metadata must match the catalogue entry metadata including:
-
-- Version
-- Status
-- Doc Repository Location
-
-**Rule 4 — Structural Compliance**
-
-All documents must be stored within `corpus/` at the repository root. Numbered taxonomy folders must not exist outside `corpus/`.
-
-**Rule 5 — Missing Document Visibility**
-
-Missing documents must be explicitly recorded using:
-
-`Status: Missing`
-
-These rules ensure the documentation system remains auditable, deterministic and ready for automated CI validation during Specification Driven Development.
-
-### CI Enforcement Rules
+# 5. CI Validation Rules
 
 ```yaml
-ci_orphan_document_detection:
-  description: Detect files present in the repository that are not registered in the corpus catalogue.
+orphan_document_detection:
+  description: Detect documents in the repository that are not registered in the corpus catalogue.
 
   validation_steps:
     - scan_repository_tree
@@ -430,13 +389,13 @@ ci_orphan_document_detection:
     - compare_repository_files_to_catalogue_entries
 
   failure_conditions:
-    - orphan_document_detected
+    - document_in_repository_without_catalogue_entry
 
   enforcement:
     fail_ci_on_orphan_document: true
 
-ci_catalogue_missing_document_detection:
-  description: Detect catalogue entries that reference documents not present in the repository.
+catalogue_resolution_validation:
+  description: Validate that all catalogue entries resolve to actual documents in the repository.
 
   validation_steps:
     - load_corpus_catalogue
@@ -499,25 +458,26 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 
 ## 7.1 Governance Documents
 
-|Document Name                         |Type      |Status  |Version|Repository Location                      |
-|--------------------------------------|----------|--------|-------|-----------------------------------------|
-|DecisionOps Project Instructions      |Governance|Approved|1.6    |corpus/00_governance/project_instructions|
-|Corpus Manifest                       |Governance|Approved|1.6    |corpus/00_governance/freeze-manifest     |
-|Corpus Catalogue                      |Governance|Approved|2.8    |corpus/00_governance/catalogue           |
-|DecisionOps CI Documentation Guard    |Governance|Draft   |0.1    |corpus/00_governance/ci                  |
-|Repository Migration Map              |Governance|Approved|1.0    |corpus/00_governance/project_instructions|
-|Document Retirement Policy            |Governance|Approved|1.3    |corpus/00_governance/policies            |
-|ADR Index and Status Register         |Governance|Approved|1.1    |corpus/00_governance/adr                 |
-|DecisionOps ADR Taxonomy Map          |Governance|Approved|1.0    |corpus/00_governance/adr                 |
-|Markdown Canonical Source Policy      |Governance|Approved|1.0    |corpus/00_governance/policies            |
-|Documentation Versioning Policy       |Governance|Approved|1.0    |corpus/00_governance/policies            |
-|Baseline Freeze and Release Policy    |Governance|Approved|1.0    |corpus/00_governance/policies            |
-|Documentation Lifecycle and CUR Policy|Governance|Approved|1.0    |corpus/00_governance/governance-model    |
-|Terminology and Naming Governance     |Reference |Approved|1.0    |corpus/07_reference/terminology          |
-|README                                |Governance|Approved|1.1    |Corpus Root                              |
-|ADR-047 Phase 0 Scaffold Contract     |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
-|ADR-048 Corpus Subdirectory Root      |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
-|ADR-049 Public Governance Repository and Bootstrap Sync|ADR|Approved|1.0|corpus/00_governance/adr|
+|Document Name                                          |Type      |Status  |Version|Repository Location                      |
+|-------------------------------------------------------|----------|--------|-------|-----------------------------------------|
+|DecisionOps Project Instructions                       |Governance|Approved|1.7    |corpus/00_governance/project_instructions|
+|Corpus Manifest                                        |Governance|Approved|1.7    |corpus/00_governance/freeze-manifest     |
+|Corpus Catalogue                                       |Governance|Approved|3.0    |corpus/00_governance/catalogue           |
+|DecisionOps CI Documentation Guard                     |Governance|Draft   |0.1    |corpus/00_governance/ci                  |
+|Repository Migration Map                               |Governance|Approved|1.0    |corpus/00_governance/project_instructions|
+|Document Retirement Policy                             |Governance|Approved|1.3    |corpus/00_governance/policies            |
+|ADR Index and Status Register                          |Governance|Approved|1.1    |corpus/00_governance/adr                 |
+|DecisionOps ADR Taxonomy Map                           |Governance|Approved|1.0    |corpus/00_governance/adr                 |
+|Markdown Canonical Source Policy                       |Governance|Approved|1.0    |corpus/00_governance/policies            |
+|Documentation Versioning Policy                        |Governance|Approved|1.0    |corpus/00_governance/policies            |
+|Baseline Freeze and Release Policy                     |Governance|Approved|1.0    |corpus/00_governance/policies            |
+|Documentation Lifecycle and CUR Policy                 |Governance|Approved|1.0    |corpus/00_governance/governance-model    |
+|Terminology and Naming Governance                      |Reference |Approved|1.0    |corpus/07_reference/terminology          |
+|README                                                 |Governance|Approved|1.1    |Corpus Root                              |
+|ADR-047 Phase 0 Scaffold Contract                      |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-048 Corpus Subdirectory Root                       |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-049 Public Governance Repository and Bootstrap Sync|ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-050 Sovereign Deployment Operational Model         |ADR       |Raised  |0.1    |corpus/00_governance/adr                 |
 
 ## 7.2 Architecture Specifications
 
@@ -529,8 +489,9 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |Policy Reasoning Engine Architecture                               |Architecture Specification|Approved|1.0    |corpus/01_architecture/runtime      |
 |Governance Runtime Architecture                                    |Architecture Specification|Draft   |1.0    |corpus/01_architecture/runtime      |
 |Intent Integrity Architecture Specification                        |Architecture Specification|Approved|1.0    |corpus/01_architecture/specification|
-|Phase 0 Platform Architecture Boundaries                          |Architecture             |Approved|1.0    |corpus/01_architecture/platform     |
-|Architecture Session Context                                       |Architecture             |Approved|1.0    |corpus/01_architecture/platform     |
+|Phase 0 Platform Architecture Boundaries                           |Architecture              |Approved|1.0    |corpus/01_architecture/platform     |
+|Architecture Session Context                                       |Architecture              |Approved|1.1    |corpus/01_architecture/platform     |
+|Security Runtime Architecture                                      |Architecture Specification|Approved|1.1    |corpus/05_security/runtime          |
 
 ## 7.3 Operations and Security
 
@@ -546,16 +507,18 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 
 ## 7.4 Strategy and Positioning
 
-|Document Name                                       |Type                  |Status  |Version|Repository Location           |
-|----------------------------------------------------|----------------------|--------|-------|------------------------------|
-|DecisionOps Platform Technical White Paper          |Technical White Paper |Approved|2.1.1  |corpus/08_strategy/positioning|
-|DecisionOps Platform Marketing White Paper          |Marketing White Paper |Approved|2.0    |corpus/08_strategy/positioning|
-|DecisionOps Platform Investor White Paper           |Investor White Paper  |Approved|0.3    |corpus/08_strategy/investor   |
-|DecisionOps Platform Future Evolutions              |Strategic Exploration |Approved|0.2.1  |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Technical Alignment|Internal Alignment    |Draft   |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Marketing Alignment|Internal Alignment    |Draft   |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Reference Architecture White Paper      |Reference Architecture|Draft   |1.0    |corpus/08_strategy/positioning|
-|DecisionOps Analyst Briefing Pack                   |Analyst Briefing      |Draft   |1.0    |corpus/08_strategy/positioning|
+|Document Name                                            |Type                  |Status    |Version|Repository Location           |
+|---------------------------------------------------------|----------------------|----------|-------|------------------------------|
+|DecisionOps Platform Technical White Paper               |Technical White Paper |Approved  |2.1.1  |corpus/08_strategy/positioning|
+|DecisionOps Platform Marketing White Paper               |Marketing White Paper |Approved  |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform Investor White Paper                |Investor White Paper  |Approved  |0.3    |corpus/08_strategy/investor   |
+|DecisionOps Platform Future Evolutions                   |Strategic Exploration |Approved  |0.2.1  |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Technical Alignment     |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Marketing Alignment     |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Reference Architecture White Paper           |Reference Architecture|Draft     |1.0    |corpus/08_strategy/positioning|
+|DecisionOps Analyst Briefing Pack                        |Analyst Briefing      |Draft     |1.0    |corpus/08_strategy/positioning|
+|Strategic Flag — AI Threat Intelligence Exchange Standard|Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
+|Strategic Flag — DecisionOps Threat Intelligence Service |Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
 
 -----
 
@@ -602,7 +565,6 @@ The following documents are defined by the architecture corpus but not yet produ
 |Document                                         |Type               |Status |Required By                  |
 |-------------------------------------------------|-------------------|-------|-----------------------------|
 |Governance Decision Engine Architecture          |Architecture       |Missing|Architecture Kernel          |
-|Security Runtime Architecture                    |Architecture       |Missing|Architecture Kernel          |
 |Approval Identity and Authority Model            |Architecture       |Missing|Architecture Kernel          |
 |Authorisation Authority Registry Schema          |Schema             |Missing|NHIE Spec v0.3               |
 |Activation Source Registry Schema                |Schema             |Missing|NHIE Spec v0.3               |
