@@ -1,6 +1,6 @@
 # DecisionOps Corpus Catalogue
 
-**Version:** 3.0
+**Version:** 3.2
 **Status:** Approved (awaiting verification)
 **Owner:** DecisionOps Architecture
 **Purpose:** Provide the authoritative inventory and structural definition of the DecisionOps documentation corpus aligned to the approved corpus taxonomy.
@@ -27,10 +27,12 @@
 **2026-03-22** v2.4 Removed Google Drive URLs from Section 4; updated Section 4 intro to reflect repository as corpus truth post-migration
 **2026-03-22** v2.5 Project Instructions updated to v1.2 (Section 22 PFS Sync Gate added)
 **2026-03-23** v2.6 Registered architecture_phase0_boundaries.md in corpus/01_architecture/platform
-**2026-03-24** v2.7  Updated decisionops_project_instructions.md version field from v1.2 to v1.4; added Section 10 deferred catalogue retirement reconciliation per Section 19 of project instructions
-**2026-03-24** v2.8  Project Instructions corrected to v1.5 (Section 24 post-merge catalogue patch); Corpus Catalogue self-reference corrected from v2.5 to v2.8
-**2026-03-25** v2.9  Registered ADR-049 and architecture_session_context.md; project instructions updated to v1.6; manifest updated to v1.6; registered decisionops-governance public repository reference
-**2026-03-28** v3.0  Security Runtime Architecture approved and registered in corpus/05_security/runtime; removed from missing documents register; runtime-security renamed to runtime throughout; architecture session context updated to v1.1; project instructions updated to v1.7; manifest updated to v1.7; ADR-050 registered; two strategic flag documents registered; catalogue self-reference corrected from v2.8 to v3.0
+**2026-03-24** v2.7 Updated decisionops_project_instructions.md version field from v1.2 to v1.4; added Section 10 deferred catalogue retirement reconciliation per Section 19 of project instructions
+**2026-03-24** v2.8 Project Instructions corrected to v1.5 (Section 24 post-merge catalogue patch); Corpus Catalogue self-reference corrected from v2.5 to v2.8
+**2026-03-25** v2.9 Registered ADR-049 and architecture_session_context.md; project instructions updated to v1.6; manifest updated to v1.6; registered decisionops-governance public governance repository reference
+**2026-03-28** v3.0 Security Runtime Architecture approved and registered in corpus/05_security/runtime; removed from missing documents register; runtime-security renamed to runtime throughout; architecture session context updated to v1.1; project instructions updated to v1.7; manifest updated to v1.7; ADR-050 registered; two strategic flag documents registered; catalogue self-reference corrected from v2.8 to v3.0
+**2026-04-07** v3.1 Project instructions updated to v1.9; manifest updated to v1.8; six new PromptStudio and CLARITY working documents registered in Section 7.4; architecture session context confirmed at v1.1
+**2026-04-10** v3.2 Manifest updated to v1.9; terminology_and_naming_governance updated to v1.1 (AI-GSOS expanded form corrected); architecture_session_context updated to v1.3 (kernel status corrections); Repository Update Process registered in corpus/00_governance/governance-model; Data and Trace Architecture registered in corpus/01_architecture/specification; Intent Integrity Architecture Specification removed from Section 7.2 (does not exist — incorrectly registered); Intent Integrity Architecture Specification added to Section 9 Missing Documents; Corpus Catalogue self-reference updated to v3.2
 
 -----
 
@@ -460,9 +462,9 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 
 |Document Name                                          |Type      |Status  |Version|Repository Location                      |
 |-------------------------------------------------------|----------|--------|-------|-----------------------------------------|
-|DecisionOps Project Instructions                       |Governance|Approved|1.7    |corpus/00_governance/project_instructions|
-|Corpus Manifest                                        |Governance|Approved|1.7    |corpus/00_governance/freeze-manifest     |
-|Corpus Catalogue                                       |Governance|Approved|3.0    |corpus/00_governance/catalogue           |
+|DecisionOps Project Instructions                       |Governance|Approved|1.9    |corpus/00_governance/project_instructions|
+|Corpus Manifest                                        |Governance|Approved|1.9    |corpus/00_governance/freeze-manifest     |
+|Corpus Catalogue                                       |Governance|Approved|3.2    |corpus/00_governance/catalogue           |
 |DecisionOps CI Documentation Guard                     |Governance|Draft   |0.1    |corpus/00_governance/ci                  |
 |Repository Migration Map                               |Governance|Approved|1.0    |corpus/00_governance/project_instructions|
 |Document Retirement Policy                             |Governance|Approved|1.3    |corpus/00_governance/policies            |
@@ -472,8 +474,9 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |Documentation Versioning Policy                        |Governance|Approved|1.0    |corpus/00_governance/policies            |
 |Baseline Freeze and Release Policy                     |Governance|Approved|1.0    |corpus/00_governance/policies            |
 |Documentation Lifecycle and CUR Policy                 |Governance|Approved|1.0    |corpus/00_governance/governance-model    |
-|Terminology and Naming Governance                      |Reference |Approved|1.0    |corpus/07_reference/terminology          |
+|Terminology and Naming Governance                      |Reference |Approved|1.1    |corpus/07_reference/terminology          |
 |README                                                 |Governance|Approved|1.1    |Corpus Root                              |
+|Repository Update Process                              |Governance|Approved|1.0    |corpus/00_governance/governance-model    |
 |ADR-047 Phase 0 Scaffold Contract                      |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
 |ADR-048 Corpus Subdirectory Root                       |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
 |ADR-049 Public Governance Repository and Bootstrap Sync|ADR       |Approved|1.0    |corpus/00_governance/adr                 |
@@ -488,9 +491,9 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |Capability Registry Architecture                                   |Architecture Specification|Approved|1.0    |corpus/01_architecture/trust        |
 |Policy Reasoning Engine Architecture                               |Architecture Specification|Approved|1.0    |corpus/01_architecture/runtime      |
 |Governance Runtime Architecture                                    |Architecture Specification|Draft   |1.0    |corpus/01_architecture/runtime      |
-|Intent Integrity Architecture Specification                        |Architecture Specification|Approved|1.0    |corpus/01_architecture/specification|
+|Data and Trace Architecture                                        |Architecture Specification|Approved|1.0    |corpus/01_architecture/specification|
 |Phase 0 Platform Architecture Boundaries                           |Architecture              |Approved|1.0    |corpus/01_architecture/platform     |
-|Architecture Session Context                                       |Architecture              |Approved|1.1    |corpus/01_architecture/platform     |
+|Architecture Session Context                                       |Architecture              |Approved|1.3    |corpus/01_architecture/platform     |
 |Security Runtime Architecture                                      |Architecture Specification|Approved|1.1    |corpus/05_security/runtime          |
 
 ## 7.3 Operations and Security
@@ -507,18 +510,24 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 
 ## 7.4 Strategy and Positioning
 
-|Document Name                                            |Type                  |Status    |Version|Repository Location           |
-|---------------------------------------------------------|----------------------|----------|-------|------------------------------|
-|DecisionOps Platform Technical White Paper               |Technical White Paper |Approved  |2.1.1  |corpus/08_strategy/positioning|
-|DecisionOps Platform Marketing White Paper               |Marketing White Paper |Approved  |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Platform Investor White Paper                |Investor White Paper  |Approved  |0.3    |corpus/08_strategy/investor   |
-|DecisionOps Platform Future Evolutions                   |Strategic Exploration |Approved  |0.2.1  |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Technical Alignment     |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Marketing Alignment     |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Reference Architecture White Paper           |Reference Architecture|Draft     |1.0    |corpus/08_strategy/positioning|
-|DecisionOps Analyst Briefing Pack                        |Analyst Briefing      |Draft     |1.0    |corpus/08_strategy/positioning|
-|Strategic Flag — AI Threat Intelligence Exchange Standard|Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
-|Strategic Flag — DecisionOps Threat Intelligence Service |Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
+|Document Name                                                          |Type                  |Status    |Version|Repository Location           |
+|-----------------------------------------------------------------------|----------------------|----------|-------|------------------------------|
+|DecisionOps Platform Technical White Paper                             |Technical White Paper |Approved  |2.1.1  |corpus/08_strategy/positioning|
+|DecisionOps Platform Marketing White Paper                             |Marketing White Paper |Approved  |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform Investor White Paper                              |Investor White Paper  |Approved  |0.3    |corpus/08_strategy/investor   |
+|DecisionOps Platform Future Evolutions                                 |Strategic Exploration |Approved  |0.2.1  |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Technical Alignment                   |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Marketing Alignment                   |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Reference Architecture White Paper                         |Reference Architecture|Draft     |1.0    |corpus/08_strategy/positioning|
+|DecisionOps Analyst Briefing Pack                                      |Analyst Briefing      |Draft     |1.0    |corpus/08_strategy/positioning|
+|Strategic Flag — AI Threat Intelligence Exchange Standard              |Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
+|Strategic Flag — DecisionOps Threat Intelligence Service               |Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
+|DecisionOps PromptStudio Context Summary                               |Working Document      |Approved  |1.1    |corpus/08_strategy/positioning|
+|PromptStudio Tier and Functional Specification                         |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
+|CLARITY-Compliant Prompt Structure Explainer and Specification         |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
+|Origin of the CLARITY Framework                                        |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
+|ARC and ARC+ Source and Evolution                                      |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
+|Strategic Flag — PromptStudio Product, CLARITY, and Commercial Strategy|Strategic Flag        |Draft     |1.0    |corpus/08_strategy/positioning|
 
 -----
 
@@ -551,6 +560,9 @@ The following ADR items are outstanding, having been identified as open governan
 |Tier 2 self-modification reflection window                             |NHIE Spec v0.3 Section 14|Open  |
 |Tier 3 self-modification reflection window                             |NHIE Spec v0.3 Section 14|Open  |
 |Signal source degraded trust threshold                                 |NHIE Spec v0.3 Section 14|Open  |
+|CLARITY / PromptSpec architectural relationship                        |Session 2026-04-07       |Open  |
+|ARC+ corpus formalisation — DecisionOps or PromptStudio scope          |Session 2026-04-07       |Open  |
+|ARC+ / CLARITY dependency relationship                                 |Session 2026-04-07       |Open  |
 
 -----
 
@@ -566,6 +578,7 @@ The following documents are defined by the architecture corpus but not yet produ
 |-------------------------------------------------|-------------------|-------|-----------------------------|
 |Governance Decision Engine Architecture          |Architecture       |Missing|Architecture Kernel          |
 |Approval Identity and Authority Model            |Architecture       |Missing|Architecture Kernel          |
+|Intent Integrity Architecture Specification      |Architecture       |Missing|Architecture Kernel          |
 |Authorisation Authority Registry Schema          |Schema             |Missing|NHIE Spec v0.3               |
 |Activation Source Registry Schema                |Schema             |Missing|NHIE Spec v0.3               |
 |Standing Execution Authorisation Schema          |Schema             |Missing|NHIE Spec v0.3               |

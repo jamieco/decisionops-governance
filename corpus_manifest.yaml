@@ -1,6 +1,6 @@
 # DecisionOps Corpus Integrity Manifest
 
-manifest_version: 1.7
+manifest_version: 1.9
 status: approved
 owner: DecisionOps Architecture
 purpose: Machine-readable integrity definition of the DecisionOps documentation corpus
@@ -16,6 +16,8 @@ edit_history:
   - "2026-03-22 v1.5 All taxonomy paths prefixed corpus/ per ADR-048; corpus_manifest repository_location updated; registered_core_documents locations updated"
   - "2026-03-25 v1.6 Registered architecture_session_context.md in corpus/01_architecture/platform; registered ADR-049; updated registered_core_documents catalogue version to 2.9 and project instructions version to 1.6"
   - "2026-03-28 v1.7 Registered security_runtime_architecture.md in corpus/05_security/runtime; renamed runtime-security to runtime in structure; updated catalogue to v3.0, project instructions to v1.7, architecture_session_context to v1.1; corrected manifest self-reference from v1.5 to v1.7; registered ADR-050"
+  - "2026-04-07 v1.8 Updated project instructions to v1.9; updated catalogue to v3.1; registered six new PromptStudio and CLARITY working documents in corpus/08_strategy/positioning; updated architecture_session_context to v1.1 (confirmed)"
+  - "2026-04-10 v1.9 Updated catalogue to v3.2; updated terminology_and_naming_governance to v1.1; updated architecture_session_context to v1.3; registered capability_registry_architecture.md, policy_reasoning_engine_architecture.md, autonomous_experiment_loop_governance_architecture.md, data_and_trace_architecture.md in corpus/01_architecture; registered decisionops_repository_update_process.md in corpus/00_governance/governance-model"
 
 corpus:
   name: DecisionOps Corpus
@@ -116,17 +118,17 @@ registered_core_documents:
   - name: corpus_catalogue.md
     location: corpus/00_governance/catalogue
     status: approved
-    version: 3.0
+    version: 3.2
 
   - name: corpus_manifest.yaml
     location: corpus/00_governance/freeze-manifest
     status: approved
-    version: 1.7
+    version: 1.9
 
   - name: decisionops_project_instructions.md
     location: corpus/00_governance/project_instructions
     status: approved
-    version: 1.7
+    version: 1.9
 
   - name: decisionops_repository_migration_map.md
     location: corpus/00_governance/project_instructions
@@ -158,12 +160,12 @@ registered_core_documents:
     status: approved
     version: 1.0
 
-  - name: corpus_governance_enforcement_policy.md
-    location: corpus/00_governance/policies
-    status: draft
-    version: 0
-
   - name: documentation_lifecycle_and_cur_policy.md
+    location: corpus/00_governance/governance-model
+    status: approved
+    version: 1.0
+
+  - name: decisionops_repository_update_process.md
     location: corpus/00_governance/governance-model
     status: approved
     version: 1.0
@@ -181,7 +183,7 @@ registered_core_documents:
   - name: terminology_and_naming_governance.md
     location: corpus/07_reference/terminology
     status: approved
-    version: 1.0
+    version: 1.1
 
   - name: README.md
     location: Corpus Root
@@ -191,12 +193,62 @@ registered_core_documents:
   - name: architecture_session_context.md
     location: corpus/01_architecture/platform
     status: approved
-    version: 1.1
+    version: 1.3
+
+  - name: capability_registry_architecture.md
+    location: corpus/01_architecture/trust
+    status: approved
+    version: 1.0
+
+  - name: policy_reasoning_engine_architecture.md
+    location: corpus/01_architecture/runtime
+    status: approved
+    version: 1.0
+
+  - name: autonomous_experiment_loop_governance_architecture.md
+    location: corpus/01_architecture/specification
+    status: approved
+    version: 1.0
+
+  - name: data_and_trace_architecture.md
+    location: corpus/01_architecture/specification
+    status: approved
+    version: 1.0
 
   - name: security_runtime_architecture.md
     location: corpus/05_security/runtime
     status: approved
     version: 1.1
+
+  - name: decisionops_promptstudio_context_summary.md
+    location: corpus/08_strategy/positioning
+    status: approved
+    version: 1.1
+
+  - name: promptstudio_tier_and_functional_specification.md
+    location: corpus/08_strategy/positioning
+    status: draft
+    version: 1.0
+
+  - name: clarity_compliant_prompt_structure_explainer_specification.md
+    location: corpus/08_strategy/positioning
+    status: draft
+    version: 1.0
+
+  - name: origin_of_the_clarity_framework.md
+    location: corpus/08_strategy/positioning
+    status: draft
+    version: 1.0
+
+  - name: arc_and_arc_plus_source_and_evolution.md
+    location: corpus/08_strategy/positioning
+    status: draft
+    version: 1.0
+
+  - name: strategic_flag_promptstudio_product_clarity_and_commercial_strategy.md
+    location: corpus/08_strategy/positioning
+    status: draft
+    version: 1.0
 
 notes:
   - "The manifest represents the expected structural state of the documentation corpus."
@@ -205,3 +257,5 @@ notes:
   - "docs/ is reserved for platform operational, support, and user documentation only."
   - "CI validation should compare repository structure against this manifest."
   - "The catalogue remains the authoritative inventory of all documents."
+  - "Six PromptStudio and CLARITY working documents registered in v1.8 — non-authoritative working status; IP review in progress."
+  - "files_in/ at repository root is a permanent staging folder — excluded from CI governance checks; not a corpus taxonomy location."
