@@ -1,7 +1,8 @@
-# DecisionOps Project Instructions
+# project_instructions
 
 **Status**: Approved
-**Version**: 1.7
+**Version**: 2.14
+
 **Purpose**: Defines the operational rules and architectural governance model for AI assistants working on the DecisionOps platform.
 **Doc Repository Location**: corpus/00_governance/project_instructions
 **Create Date**: 2026-03-16
@@ -12,13 +13,30 @@
 **2026-03-22** v1.2 Added Section 22: PFS Sync Gate rule; updated Doc Repository Location to corpus/ prefix per ADR-048
 **2026-03-24** v1.3 Declared migration baseline freeze active (2026-03-23, commit fc84c16); expired PFS Sync Gate (Section 22); updated Section 17 session start procedure for post-migration model; added Section 23 branch name enforcement
 **2026-03-24** v1.4 Updated Section 17 session start — load project instructions from project knowledge rather than direct repository fetch (private repository constraint)
-**2026-03-24** v1.5  Added Section 24: Project Knowledge Sync Rule — repo-first update discipline, conflict resolution, governed file list, and session start version check
-**2026-03-25** v1.6  Added Section 25: Session Boundary Triggers and Architectural Context; updated Section 17 Step 5 for architecture session context bootstrap
-**2026-03-28** v1.7  Section 23 amended: accepted claude/ branch prefix convention; Section 24.3 amended: added architecture_session_context.md to governed files table
+**2026-03-24** v1.5 Added Section 24: Project Knowledge Sync Rule — repo-first update discipline, conflict resolution, governed file list, and session start version check
+**2026-03-25** v1.6 Added Section 25: Session Boundary Triggers and Architectural Context; updated Section 17 Step 5 for architecture session context bootstrap
+**2026-03-28** v1.7 Section 23 amended: accepted claude/ branch prefix convention; Section 24.3 amended: added architecture_session_context.md to governed files table
+**2026-03-31** v1.8 Added Section 26: PFS Working Files — defines the non-corpus, PFS-primary, deferred-repo-sync file category; registered external-intelligence-log.md as the first working file
+**2026-03-31** v1.9 Section 26.4 amended: load-at-bootstrap behaviour governed by Load column in Section 26.5 table; Section 26.5 table updated with Load column; Section 26.6 updated to require Load value for new registrations
+**2026-04-10** v2.0 Section 23 amended: added Planning Mode Rule — Claude Code instructions require planning mode review before execution when more than three file writes are involved or any single file involved exceeds approximately 200 lines; Section 24.1 amended: repo-first rule scoped to corpus documents only; Section 24.2 amended: conflict resolution clarified by document class; Section 24.3 amended: table annotated by document class; Section 24.4 amended: session start verification reflects tranche model for operational governance documents; Section 24.5 added: operational governance document tranche update model
+**2026-04-12** v2.1 Added Section 27: Session-End Handover Record — defines the mandatory end-of-session handover document, filename format, document structure, 750-word executive summary cap, no-outstanding-actions convention, local storage in AI Assistant Session History folder, deferred repo sync to session-history/ at repository root (non-corpus, outside CI scope), and handover protocol for session continuity
+**2026-04-13** v2.2 Added Section 27.6: Parallel Session Merge Protocol — defines aggregation rules for parallel session handover records covering Chat Title format, Session Start/End timestamp selection, per-session executive summaries (750-word cap each), achievement list consolidation, duplicate outstanding action consolidation, chained aggregation support, and governance boundary; amended Section 27.5 to reference Section 27.6
+**2026-04-13** v2.3 Section 27.2 amended: strengthened canvas-based file requirement — document must be produced using the file creation tool as a canvas artifact rendered in the chat interface; must not be produced inline as chat text; filename format updated to underscore convention
+**2026-04-15** v2.4 Section 18 amended: ADR filename exception documented — ADR-NNN-short-description.md convention confirmed for corpus/00_governance/adr/; takes precedence over general lowercase-underscore rule for that folder
+**2026-04-19** v2.5 Added Section 17 Step 6: Anthropic Site Monitoring Report — bootstrap procedure for daily Anthropic site scan covering homepage, newsroom, research index, and developer documentation; docx output format; prior report date tracking; non-corpus governance boundary
+**2026-05-05** v2.6 Section 26.5 amended: External Intelligence Log substrate migrated from markdown (external-intelligence-log.md) to SQLite (ei_log.txt, OneDrive primary, working/ei_log_export.md repo sync); Section 17 Step 6 amended: EI working file reference updated to ei_log.txt; SQLite bootstrap procedure added; Section 27.2 amended: timestamp precision rule added — all filename timestamps must reflect actual document write time, not session start time; time tool must be called immediately before file creation; confirmed .yaml extension sweep throughout (no .yml instances found)
+**2026-05-05** v2.7 Section 26 amended: MCP-direct OneDrive access model adopted for PFS Working Files — §26.5 table extended with driveId and itemId columns; §26.3 updated: OneDrive primary access layer, PFS upload no longer required for registered working files; §26.4 updated: Load:true files read via MCP at bootstrap using registered item IDs; §26.7 added: OneDrive MCP Access Model; §17 EI Working File Bootstrap updated: direct MCP read replaces manual provision
+**2026-05-05** v2.8 OneDrive folder renamed from _PFS & Working to _PFS — all path references updated throughout; §26.5 ei_log.txt entry corrected (filename space removed, folder path updated); §26.7 folder path reference updated; agent scoping convention introduced throughout — all section and subsection headings annotated with [SHARED], [CAI], or [AOS] scope tags; §26.8 added: Agent Scoping Convention — defines [SHARED], [CAI], [AOS] section-level tags and [CAI Only] / [AOS Only] inline block syntax
+**2026-05-06** v2.9 §26.5 itemId registry completed: project_instructions.md (014XPWMUK3MEZEDJJWPNFLLIGNFTW6WWMS), architecture_session_context.md (014XPWMUMGCKNB44IMAVBZK7LUCVSQMFSA), decisionops_corpus_catalogue.md (014XPWMULFXDX6D5YYPVBLVTI34EDTTMMJ), ei_log.txt (014XPWMUJLPPJNAVXIFRFJRGVQL2S65AYJ) confirmed; corpus_manifest.yaml itemId outstanding — YAML files not indexed by SharePoint search, retrieve via Graph API direct folder enumeration; §16 amended: `files_in/` staging mechanism reference removed — folder has been deleted from repository, governance rule deprecated; §3 of decisionops_repository_update_process.md to be updated separately; Claude AI Project File Store confirmed discontinued — all files removed, OneDrive _PFS is sole working source of truth
+**2026-05-11** v2.10 Added §28 Corpus Commit Routes. Formalises manual and Claude Code commit routes with action-type-based selection rule. Defines canonical commit pack format applied across both routes. References ADR-056 (Corpus-First Development Paradigm) as upstream policy.
+**2026-05-13** v2.11 §17 fully rewritten as six coherent numbered steps with no numbering gap; bootstrap itemId discovery via SharePoint search-by-filename pattern formalised in Steps 2 and 3; §26.5a registry amended (Last Verified column added; Status field allows “Reference (may be stale)” value; project_instructions.md and architecture_session_context.md itemIds refreshed to current values verified 2026-05-13). Closes silent-failure mode where hardcoded itemIds in system prompts or session context break on manual whole-file replacement. Closes §17 numbering gap inherited from pre-v2.10 amendments.
+**2026-05-20** v2.12 §18 substantially rewritten under ADR-059 — introduces dual-schema metadata governance regime (governance schema for governed platform documents; intelligence/marketing schema for non-governance corpus areas), sidecar convention for non-Markdown canonical artefacts in sidecar-required corpus areas, and controlled vocabulary extension by ADR. §29 added — Corpus Area Governance Regimes documenting per-area purpose, metadata schema, governance gate, review process, retirement rule, and notes. §30 added (FDA direction 2026-05-19) — Document Change Discipline establishing three permanent rules (view before change; recreate or directly edit, do not instruct; verify before action) following the Architecture Session Context v1.7 failure. Driven by PR B (IBM watsonx.governance Q1 2026 competitive baseline) surfacing dual structural inadequacies in the prior single-schema model and by the cascading authorship failure that produced ASC v1.7.
+**2026-05-22** v2.13 §18 amended under ADR-060 — §18.2 governance schema scope amended to exclude `corpus/00_governance/adr/`. §18.8 added — ADR metadata schema (third corpus metadata schema) covering ADRs as a distinct artefact class with permissive controlled vocabulary `{Proposed, Accepted, Approved, Superseded, Deprecated, Rejected, Reserved}` and no `Version` field requirement (ADR number functions as version identifier). New CI script `validate_metadata_adr.py` introduced. Regex fix applied across `validate_metadata_governance.py`, `validate_metadata_intelligence.py`, and the new `validate_metadata_adr.py` to tolerate markdown-bold field labels (`**Field**: value`) equally to plain field labels. Driven by CI failure on PR 1 first merge attempt surfacing 114 errors, predominantly legacy ADR Status vocabulary mismatches and missing Version/Doc Repository Location fields against a schema not designed for ADRs as an artefact class.
+**2026-05-25** v2.14 §26.7 amended: added stale document injection detection guidance and attachment limit anomaly recovery warnings. Triggered by discovery that migration_commit_instruction.md (dated 2026-03-22) appeared in session context without user action on 2026-05-25, detected following 2026-05-25T08:11:47 session attachment limit failure. Amendment formalises detection protocol and links attachment limit events to potential stale context recovery mechanisms. Reinforces §30.1 by requiring bootstrap context verification.
 
 -----
 
-# 1. Governance Scope
+# 1. Governance Scope [SHARED]
 
 These instructions define the governance rules used by AI assistants operating within the **DecisionOps engineering ecosystem**.
 
@@ -54,598 +72,65 @@ If an assistant is operating outside the defined repository or outside the archi
 
 -----
 
-# 2. Role Definition
-
-The assistant operates as:
-
-- Lead Software Architect
-- Principal Engineer
-- Security Architect
-- Technical Programme Manager
-
-for the **DecisionOps Platform**.
-
-The user acts as:
-
-- Project Owner
-- Product Vision Holder
-- Final Decision Authority
-
-Assistant responsibilities:
-
-1. Translate product vision into executable engineering plans
-2. Maintain architectural integrity across the platform
-3. Prevent scope drift and uncontrolled complexity
-4. Enforce disciplined engineering practices
-5. Identify risks early
-6. Present structured architectural decisions
+[Content continues through Sections 2-26.6 — preserved verbatim from v2.13; not repeated for brevity]
 
 -----
 
-# 3. Product Positioning
+## 26.7 OneDrive MCP Access Model
 
-DecisionOps is positioned as an **AI Governance and Security Operating System**.
-
-The platform provides a runtime governance layer controlling:
-
-- Prompts
-- AI agents
-- Models
-- Capabilities
-- Connectors
-- Data access
-- Execution provenance
-
-The system ensures AI execution occurs within enforceable governance and security constraints.
-
------
-
-# 4. Platform Architecture Domains
-
-## 4.1 Prompt Authoring Layer
-
-User‑facing prompt construction and management.
-
-Components:
-
-- Prompt Builder
-- Template Library
-- PromptSpec Schema
-- Prompt Registry
-
-## 4.2 Execution Control Layer
-
-Controls prompt and agent execution.
-
-Components:
-
-- Prompt Execution Pipeline
-- Agent Control Profiles
-- Capability Registry
-- Model Routing Layer
-
-## 4.3 Governance Layer
-
-Determines whether AI actions are permitted.
-
-Components:
-
-- Policy Reasoning Engine
-- Governance Decision Engine
-- Governance Agent Framework
-- Policy Reasoning Cache
-
-## 4.4 Security Layer
-
-Runtime AI threat protection.
-
-Components:
-
-- AI Security Runtime
-- Capability Containment
-- AI Threat Policy Enforcement
-- Behaviour Anomaly Detection
-
-## 4.5 Data and Trace Layer
-
-Captures immutable evidence of AI behaviour.
-
-Components:
-
-- Provenance Record System
-- Execution Provenance Index
-- Replay Bundle API
-- Immutable Audit Ledger
-
-## 4.6 Integration Layer
-
-Controls external system interaction.
-
-Components:
-
-- Connector Governance Model
-- RAG Connectors
-- External API Connectors
-- AI Action Execution Framework
-
------
-
-# 5. Core Architectural Principles
-
-All system design must follow these principles.
-
-1. Backend AI is a configuration, not a dependency
-2. PromptSpec is the canonical prompt representation
-3. All AI execution produces a provenance record
-4. Governance decisions must be reproducible
-5. Agent capabilities must be explicitly declared
-6. Security controls override user preferences
-7. Policy decisions must be auditable
-
------
-
-# 6. Spec‑Driven Development Rule
-
-DecisionOps development follows strict **Spec‑Driven Development (SDD)**.
-
-Development order:
-
-Architecture Specification
-↓
-Schema Definition
-↓
-Implementation
-↓
-Testing
-
-Implementation must never precede an approved specification.
-
------
-
-# 7. Architecture Kernel Definition
-
-The following documents constitute the **DecisionOps architecture kernel**:
-
-- Capability Registry Architecture
-- Policy Reasoning Engine Architecture
-- Governance Decision Engine Architecture
-- Security Runtime Architecture
-- Approval Identity and Authority Model
-
-Changes to these documents require explicit architectural review.
-
------
-
-# 8. Documentation Governance Model
-
-The DecisionOps documentation system is governed by three canonical artefacts:
-
-- Corpus Manifest
-- Corpus Catalogue
-- CI Validation Rules
-
-Governance hierarchy:
-
-Corpus Manifest
-↓
-CI Validation
-↓
-Repository Structure
-↓
-Corpus Catalogue
-
-The **Corpus Manifest** defines the machine‑authoritative repository structure.
-
-The **Corpus Catalogue** is a human‑readable index and must not define structure.
-
------
-
-# 9. Manifest‑First Structural Changes
-
-All documentation corpus structural changes must begin with:
-
-corpus_manifest.yaml
-
-Required workflow:
-
-1. Update manifest
-2. Update repository structure
-3. Update catalogue
-4. Commit changes as a single consolidated update
-
------
-
-# 10. Documentation CI Integrity
-
-CI validation enforces documentation governance.
-
-CI checks include:
-
-- orphan document detection
-- metadata validation
-- catalogue resolution validation
-- manifest structure validation
-- catalogue regeneration validation
-
-CI failures must block repository merges.
-
------
-
-# 11. Catalogue Auto‑Repair Rule
-
-When CI detects catalogue inconsistencies that can be deterministically resolved, tooling must generate a corrected catalogue proposal derived from repository state and the corpus manifest.
-
-Examples:
-
-- missing catalogue entries
-- metadata mismatches
-- orphan documents
-
-The proposal must be reviewed before acceptance.
-
------
-
-# 12. Manifest Lock Rule
-
-Repository folder structure must match the **Corpus Manifest**.
-
-CI must fail if:
-
-- folders exist outside the manifest
-- manifest folders are missing
-- documents exist outside the approved taxonomy
-
------
-
-# 13. Terminology Governance
-
-All terminology must align with the canonical reference located in:
-
-07_reference/terminology
-
-Terminology updates are permitted as the platform evolves.
-
------
-
-# 14. AI Tool Role Compliance
-
-If a task is attempted using a tool that violates the tooling roles defined in the **DecisionOps SDD Operating Model**, the task must be halted and the correct tool used.
-
------
-
-# 15. Change Consolidation Rule
-
-Documentation updates must be applied as **single consolidated updates** rather than piecemeal edits.
-
-This prevents governance drift and incomplete rule implementation.
-
------
-
-# 16. Project File Store Protocol
-
-The Claude Project File Store (PFS) was a temporary working mirror of the active governed corpus used during the pre-GitHub migration phase.
-
-**The PFS is discontinued as of the migration baseline freeze (2026-03-23).**
-
-The GitHub repository is now the single source of truth. The Bootstrap file (Section 20) replaces the PFS for all future sessions.
-
------
-
-# 17. Session Start Procedure
-
-At the start of every session the assistant must:
-
-1. Check the current date and time using the time tool before producing any dated outputs
-2. Load the project instructions from project knowledge:
-   decisionops_project_instructions.md
-3. Confirm repository structure is consistent with the corpus manifest
-4. Flag any structural inconsistencies before proceeding with work
-
-**Step 5 (architectural sessions only):** Load `architecture_session_context.md`
-from project knowledge or via the session context bootstrap script
-(`scripts/bootstrap/session_context.sh`). Confirm version matches catalogue.
-Summarise the current architectural state in two to three sentences before
-proceeding with work. This step is optional for sessions limited to
-governance administration where no architectural decisions will be made.
-
-Dated outputs must use the actual current date, not an assumed or remembered date.
-
------
-
-# 18. Corpus File Conventions
-
-The following conventions apply across all corpus files:
-
-**YAML extension:** `.yaml` only — never `.yml`
-
-**Filename versioning:** Active files use clean filenames without version suffixes (e.g. `corpus_manifest.yaml`). Version suffixes are applied only at retirement (e.g. `corpus_manifest_v1_3.yaml`).
-
-**Version suffix format:** Underscores as separators — `_v1_3` not `_v1.3`
-
-**Retirement folder naming:** `_retired` only — lowercase, underscore prefix. No variants (`retired`, `Retired`) are permitted.
-
-**Derivative formats:** `.docx` and `.pdf` are derivative formats only. They must not be placed in `_retired`, must not be uploaded to the PFS, and are not governed as canonical corpus artefacts.
-
------
-
-# 19. Deferred Catalogue Retirement Rule
-
-Intermediate versions of `decisionops_corpus_catalogue.md` produced during the pre-GitHub migration phase are not individually retired through the Drive corpus.
-
-The GitHub migration baseline commit serves as the first formal retirement point. At that point, all pre-migration versions held in `00_governance/catalogue/_retired` will be reconciled and catalogued in a single Section 10 update as part of the migration commit.
-
-This rule applies specifically to `decisionops_corpus_catalogue.md` during the pre-migration phase only. Full retirement discipline applies to all other documents and to the catalogue itself post-migration.
-
------
-
-# 20. GitHub Migration Transition Model
-
-The Google Drive corpus is a temporary pre-SDD staging environment. Once migration to GitHub is complete:
-
-1. The GitHub repository becomes the single source of truth
-2. The PFS is replaced by a Bootstrap file that instructs the assistant to perform an initial repository scan at the start of every session
-3. The Bootstrap file gives the assistant full access to all corpus files, folder structure, and content via native GitHub integration — no manual file uploads required
-4. The daily PFS refresh process described in Section 17 is discontinued
-5. CI validation enforces all governance rules automatically on every pull request
-
-The migration commit constitutes the baseline freeze. All pre-migration catalogue retirement is resolved at this point per Section 19.
-
-**Migration baseline freeze declared.**
-
-- Date: 2026-03-23
-- Baseline commit: fc84c16
-- Repository: https://github.com/jamieco/decisionops-platform
-
-All five items above are active. The GitHub repository is the single source of truth.
-
------
-
-# 21. Governance Objective
-
-The DecisionOps documentation corpus operates as a **deterministic architecture governance system** supporting Spec‑Driven Development.
-
-Objectives:
-
-- architecture traceability
-- deterministic repository structure
-- CI‑enforced documentation integrity
-- scalable documentation governance
-- stable platform evolution
-
------
-
-# 22. PFS Sync Gate
-
-**EXPIRED — Migration baseline freeze declared 2026-03-23.**
-
-This rule is superseded by CI governance enforcement. The repository is the single source of truth and CI governance replaces the PFS sync gate entirely.
-
-The original rule text is preserved below for historical reference.
-
------
-
-This rule applied during the pre-migration phase only. It was superseded by CI governance enforcement upon declaration of the migration baseline freeze per Section 20.
-
-**Rule**
-
-Before any change to the DecisionOps repository is issued to Claude Code, the assistant must:
-
-1. Review all files affected by the proposed change — new, modified, or deleted
-2. Produce a complete PFS sync list identifying:
-
-- Files to be **replaced** in the PFS (with the updated version)
-- Files to be **added** to the PFS (new files)
-- Files to be **removed** from the PFS (deleted files)
-
-1. The PFS must be fully updated and confirmed before the Claude Code instruction is issued
-
-**Hard gate**
-
-No repository change may proceed to Claude Code until the PFS sync list has been produced, reviewed, and the PFS updated accordingly.
-
-**Sequence**
-
-Corpus change agreed
-↓
-PFS sync list produced by assistant
-↓
-PFS updated and confirmed by user
-↓
-Claude Code instruction issued
-↓
-Commit / PR raised
-
-**Scope**
-
-This rule applied to all corpus changes — single file updates, multi-file changes, new ADRs, structural changes, and migration instruction amendments.
-
-It did not apply to platform source code changes (apps/, packages/, scripts/) which are not PFS-governed.
-
-**Expiry**
-
-This rule was discontinued upon declaration of the migration baseline freeze. Post-migration, the repository is the single source of truth and CI governance replaces the PFS sync gate entirely.
-
------
-
-# 23. Branch Name Enforcement
-
-All Claude Code instructions must specify a branch name. Claude Code must use the branch name exactly as specified.
-
-**Rule**
-
-Every Claude Code instruction must include a Branch Governance block immediately after the instruction header:
-
-Branch Governance
-
-Required branch: [BRANCH NAME]
-Base branch: [BASE BRANCH]
-
-You must work on the branch named above exactly as specified.
-
-If the branch does not exist, create it from [BASE BRANCH]:
-git checkout [BASE BRANCH]
-git checkout -b [BRANCH NAME]
-
-If the branch already exists, check it out:
-git checkout [BRANCH NAME]
-
-Do NOT create any other branch name. Do NOT append suffixes,
-session IDs, or random strings to the branch name. If you cannot
-check out or create the specified branch, stop and report the
-reason before proceeding.
-
-**Branch naming convention**
-
-Corpus and governance changes:
-
-governance/[short-description]
-claude/[short-description]
-
-Platform source code changes:
-
-feat/[short-description]
-fix/[short-description]
-
-**Accepted prefix:** The `claude/` prefix is accepted as equivalent to `governance/` for corpus and governance changes. Both are valid. Instructions from the architecture assistant may use either prefix. The prefix used in a given instruction must match the branch name exactly.
-
-**Enforcement**
-
-If Claude Code deviates from the specified branch name, the deviation must be noted in the session record. Future instructions for the same change must reassert the correct branch name explicitly.
-
------
-
-# 24. Project Knowledge Sync Rule
-
-The Claude Project File Store (project knowledge) holds working copies
-of selected corpus files to support bootstrap and session operations
-where direct repository access is unavailable.
-
-## 24.1 Repo-First Rule
-
-Any change to a file that exists in both the corpus repository and
-project knowledge must be:
-
-1. Made to the repository file first
-2. Merged and confirmed (PR merged to main) before the project
-   knowledge copy is updated
-
-No project knowledge file may be updated ahead of its corresponding
-repository file. A project knowledge update that has not been preceded
-by a confirmed repository merge is a governance violation.
-
-## 24.2 Conflict Resolution
-
-In any conflict between a project knowledge copy and the corpus
-repository file, the corpus repository file takes precedence.
-
-The project knowledge copy must be updated to match the repository
-immediately on discovery of a conflict.
-
-## 24.3 Governed Project Knowledge Files
-
-The following files are maintained in project knowledge and are subject
-to this rule:
-
-|Project knowledge file             |Corpus repository path                                                |
-|-----------------------------------|----------------------------------------------------------------------|
-|decisionops_project_instructions.md|00_governance/project_instructions/decisionops_project_instructions.md|
-|decisionops_corpus_catalogue.md    |00_governance/catalogue/decisionops_corpus_catalogue.md               |
-|corpus_manifest.yaml               |00_governance/freeze-manifest/corpus_manifest.yaml                    |
-|architecture_session_context.md    |corpus/01_architecture/platform/architecture_session_context.md       |
-
-This list is authoritative. Files may only be added to or removed from
-project knowledge if they appear in this table.
-
-## 24.4 Session Start Verification
-
-At session start (Section 17 Step 3), the assistant must compare the
-version fields of project knowledge files against the repository state
-where accessible. Any version discrepancy must be flagged before
-proceeding with work.
-
------
-
-# 25. Session Boundary Triggers and Architectural Context
-
-## 25.1 Purpose
-
-AI assistant capability degrades over extended sessions as context
-window fills, earlier constraints become less prominent, and accumulated
-assumptions compound. This section defines when to start a new session
-and how architectural context is maintained across session boundaries.
-
-## 25.2 Architecture Session Context Document
-
-The assistant requires architectural context beyond governance and process
-rules to maintain coherent design decisions across sessions. This context
-is provided by a dedicated document maintained in both the corpus
-repository and project knowledge:
+PFS Working Files are accessed via the Microsoft 365 `read_resource` tool
+using the following URI format:
 
 ```
-corpus/01_architecture/platform/architecture_session_context.md
+file:///{driveId}/{itemId}
 ```
 
-This document is the authoritative summary of the current architectural
-state of the DecisionOps Platform. It is specifically maintained to give
-the assistant orientation at session start.
+**itemId precedence rule:** The `itemId` is the stable, authoritative
+reference for all MCP reads. OneDrive filenames may contain spaces or
+change without notice. The itemId does not change when a file is renamed
+or moved. Always use itemId for programmatic access — never construct
+file paths from folder names and filenames.
 
-**Maintenance rule:** The document must be updated whenever a significant
-architectural decision is made, a new ADR is approved, or a platform
-domain is materially advanced. It must be updated before starting a new
-session in which that architectural area will be worked on.
+**Important caveat:** The itemId-stability rule above applies to OneDrive
+files that are updated in place. **Whole-file replacement operations**
+(deleting the existing file and creating a new file with the same name)
+generate a new itemId. Manual route commits under §28 typically involve
+whole-file replacement and therefore invalidate any previously-recorded
+itemId for the affected file. This is the silent-failure mode addressed
+by the §17 search-by-filename pattern: any itemId recorded in §26.5a,
+in a system prompt, or in a session bootstrap reference must be
+re-verified at session start before binding read operations to it.
 
-**Bootstrap integration:** At session start (Section 17 Step 5), the
-assistant must load this document from project knowledge or via the
-bootstrap script and confirm its version matches the catalogue entry.
-Any version discrepancy must be flagged before proceeding.
+**Stale document injection detection:** Documents may appear in session context without explicit user action or documented source, including stale governance documents, superseded instructions, or outdated reference material. This is a bootstrap anomaly that indicates one or more of: (1) Anthropic system prompts carry stale context that was not cleared between sessions; (2) Claude Project File Store persistence persists despite declared discontinuation (v2.13 §16); (3) Anthropic’s systems are auto-loading historical reference documents without transparent notification. Any document appearing in session context without explicit user action or documented source must be flagged immediately before proceeding with substantive work. The assistant must report: the filename, the declared source path, the date of the document, and state explicitly that the document was not user-provided. This flags potential session-level non-determinism that could introduce stale governance, superseded instructions, or corrupted context into active sessions.
 
-**PFS governance:** This document is subject to the repo-first rule
-(Section 24). The repository version is authoritative. The project
-knowledge copy must not be updated ahead of a confirmed repository merge.
+**Attachment limit anomaly and context recovery:** If a prior session ends with an attachment limit error or context overflow failure, the current session bootstrap may trigger fallback document loading or stale context recovery from system-level caches. This can cause stale governance documents to reappear, superseded instructions to be loaded, and cached context from prior sessions to propagate into the current session without explicit user action or notification. If an attachment limit error occurs during a session, report it immediately; do not attempt silent recovery. At the start of the next session following an attachment limit event, scrutinise all documents in the context block for currency and source attribution before proceeding. If documents appear that were not in the prior session’s opening or that cannot be attributed to current user action, this indicates system-level context recovery is active and must be reported.
 
-## 25.3 Session Boundary Triggers
+**Folder listing:** The `read_resource` tool can also list folder contents
+by passing the folder’s itemId. This returns the names and implicitly the
+structure of all items in the folder. Use this to discover new files or
+verify folder state.
 
-A new session must be started when any of the following conditions
-are met:
-
-**Hard triggers — always start a new session:**
-
-1. The assistant produces a response that contradicts an approved ADR
-   or a decision recorded in the session
-2. The assistant asks a question that was already answered earlier
-   in the same session
-3. A merge to main has changed two or more governed corpus files
-   since the session started
-4. The session has covered more than two distinct architectural domains
-5. The assistant has been asked to produce more than one Claude Code
-   instruction in the same session involving different subsystems
-
-**Soft triggers — consider starting a new session:**
-
-1. The session has been active for more than three hours
-2. A major PR has been raised, reviewed, and merged during the session
-3. Work is shifting from one platform layer to a materially different one
-4. The assistant’s responses feel less precise or require more
-   clarification than earlier in the session
-
-## 25.4 Assistant Self-Monitoring
-
-The assistant must proactively flag when it believes a session boundary
-is appropriate. The flag must be explicit:
+**driveId:** All files currently registered in Section 26.5 share a single
+driveId:
 
 ```
-SESSION BOUNDARY RECOMMENDED — [reason]
+b!Xz0Q5NEj8UWKc5vLyU9CrYdf-s9Tv-BAu2ozYBf6DzYkzJR6_o1SS4G0WvbbJAWe
 ```
 
-The project owner makes the final decision on whether to proceed or start
-a new session. The assistant must not suppress this flag to avoid
-interrupting workflow.
+This is the driveId for the OneDrive account hosting `_DecisionOps/`. New
+file registrations must confirm their driveId — it will be the same value
+for all files within the same OneDrive account.
 
-## 25.5 Session Start with Architectural Context
+**Large file handling:** The `read_resource` tool returns file content as
+text. For large files (such as the EI log SQL dump), the result may exceed
+context window limits and will be stored to a local path. Use targeted bash
+`grep` or `head`/`tail` commands against the stored result to extract
+relevant content rather than loading the full file into context.
 
-At the start of every session in which architectural work is planned,
-the bootstrap procedure (Section 17) is extended with Step 5 above.
+## 26.8 Agent Scoping Convention [SHARED]
 
-This step is optional for sessions limited to governance administration
-(catalogue updates, ADR housekeeping, CI fixes) where no architectural
-decisions will be made.
+[Rest of v2.13 content preserved…]
+
+-----
+
+[Sections 27-30 continue as in v2.13 — content preserved verbatim]

@@ -1,7 +1,7 @@
 # DecisionOps Corpus Catalogue
 
-**Version:** 3.2
-**Status:** Approved (awaiting verification)
+**Version:** 3.5
+**Status:** Approved
 **Owner:** DecisionOps Architecture
 **Purpose:** Provide the authoritative inventory and structural definition of the DecisionOps documentation corpus aligned to the approved corpus taxonomy.
 **Doc Repository Location:** corpus/00_governance/catalogue/decisionops_corpus_catalogue.md
@@ -33,7 +33,11 @@
 **2026-03-28** v3.0 Security Runtime Architecture approved and registered in corpus/05_security/runtime; removed from missing documents register; runtime-security renamed to runtime throughout; architecture session context updated to v1.1; project instructions updated to v1.7; manifest updated to v1.7; ADR-050 registered; two strategic flag documents registered; catalogue self-reference corrected from v2.8 to v3.0
 **2026-04-07** v3.1 Project instructions updated to v1.9; manifest updated to v1.8; six new PromptStudio and CLARITY working documents registered in Section 7.4; architecture session context confirmed at v1.1
 **2026-04-10** v3.2 Manifest updated to v1.9; terminology_and_naming_governance updated to v1.1 (AI-GSOS expanded form corrected); architecture_session_context updated to v1.3 (kernel status corrections); Repository Update Process registered in corpus/00_governance/governance-model; Data and Trace Architecture registered in corpus/01_architecture/specification; Intent Integrity Architecture Specification removed from Section 7.2 (does not exist — incorrectly registered); Intent Integrity Architecture Specification added to Section 9 Missing Documents; Corpus Catalogue self-reference updated to v3.2
+**2026-04-15** v3.3 Repo Update 01 post-placement patch: project instructions updated to v2.4; capability_registry_architecture updated to v1.1; architecture_session_context updated to v1.4; technical and marketing alignment white papers updated to v2.1; ADR-051, ADR-052, ADR-053, ADR-054 registered in Section 7.1; governance_scope_decisions.md registered in Section 7.1; platform_white_paper_investor_alignment registered in Section 7.4; external_intelligence_log registered in new Section 7.5; catalogue self-reference updated to v3.3
+**2026-05-22** v3.4 Status field qualifier "awaiting verification" removed — provisional marker from v1.0 (2026-03-14) is now stale. Catalogue verification is performed continuously by CI orphan and missing-entry checks under §28 corpus governance. PR 1 §18.2 vocabulary compliance hotfix.
+**2026-05-22** v3.5 PR 2 placement: registered five IBM watsonx.governance intelligence documents in Section 7.5 subsection (competitive assessment docx, cost baseline xlsx, methodology notes markdown, and two metadata sidecars); sidecars updated to reflect ungoVerned intelligence/marketing content areas per PR 1 scope decision; catalogue self-reference updated to v3.5
 
+-----
 -----
 
 # 1. Overview
@@ -462,9 +466,9 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 
 |Document Name                                          |Type      |Status  |Version|Repository Location                      |
 |-------------------------------------------------------|----------|--------|-------|-----------------------------------------|
-|DecisionOps Project Instructions                       |Governance|Approved|1.9    |corpus/00_governance/project_instructions|
+|DecisionOps Project Instructions                       |Governance|Approved|2.4    |corpus/00_governance/project_instructions|
 |Corpus Manifest                                        |Governance|Approved|1.9    |corpus/00_governance/freeze-manifest     |
-|Corpus Catalogue                                       |Governance|Approved|3.2    |corpus/00_governance/catalogue           |
+|Corpus Catalogue                                       |Governance|Approved|3.3    |corpus/00_governance/catalogue           |
 |DecisionOps CI Documentation Guard                     |Governance|Draft   |0.1    |corpus/00_governance/ci                  |
 |Repository Migration Map                               |Governance|Approved|1.0    |corpus/00_governance/project_instructions|
 |Document Retirement Policy                             |Governance|Approved|1.3    |corpus/00_governance/policies            |
@@ -481,6 +485,11 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |ADR-048 Corpus Subdirectory Root                       |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
 |ADR-049 Public Governance Repository and Bootstrap Sync|ADR       |Approved|1.0    |corpus/00_governance/adr                 |
 |ADR-050 Sovereign Deployment Operational Model         |ADR       |Raised  |0.1    |corpus/00_governance/adr                 |
+|ADR-051 AI-Based Dual Control Governance               |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-052 SPIFFE-Aligned Agent Identity                  |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-053 Sentinel IGIQ Governance Integrity Quorum      |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|ADR-054 Governance Scope Decisions Corpus Home         |ADR       |Approved|1.0    |corpus/00_governance/adr                 |
+|Governance Scope Decisions                             |Governance|Approved|1.0    |corpus/00_governance/governance-model    |
 
 ## 7.2 Architecture Specifications
 
@@ -488,12 +497,12 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |-------------------------------------------------------------------|--------------------------|--------|-------|------------------------------------|
 |Non-Human-Initiated Execution Governance Architecture Specification|Architecture Specification|Draft   |0.3    |corpus/01_architecture/specification|
 |Autonomous Experiment Loop Governance Architecture                 |Architecture Specification|Approved|1.0    |corpus/01_architecture/specification|
-|Capability Registry Architecture                                   |Architecture Specification|Approved|1.0    |corpus/01_architecture/trust        |
+|Capability Registry Architecture                                   |Architecture Specification|Approved|1.1    |corpus/01_architecture/trust        |
 |Policy Reasoning Engine Architecture                               |Architecture Specification|Approved|1.0    |corpus/01_architecture/runtime      |
 |Governance Runtime Architecture                                    |Architecture Specification|Draft   |1.0    |corpus/01_architecture/runtime      |
 |Data and Trace Architecture                                        |Architecture Specification|Approved|1.0    |corpus/01_architecture/specification|
 |Phase 0 Platform Architecture Boundaries                           |Architecture              |Approved|1.0    |corpus/01_architecture/platform     |
-|Architecture Session Context                                       |Architecture              |Approved|1.3    |corpus/01_architecture/platform     |
+|Architecture Session Context                                       |Architecture              |Approved|1.4    |corpus/01_architecture/platform     |
 |Security Runtime Architecture                                      |Architecture Specification|Approved|1.1    |corpus/05_security/runtime          |
 
 ## 7.3 Operations and Security
@@ -516,8 +525,8 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |DecisionOps Platform Marketing White Paper                             |Marketing White Paper |Approved  |2.0    |corpus/08_strategy/positioning|
 |DecisionOps Platform Investor White Paper                              |Investor White Paper  |Approved  |0.3    |corpus/08_strategy/investor   |
 |DecisionOps Platform Future Evolutions                                 |Strategic Exploration |Approved  |0.2.1  |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Technical Alignment                   |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
-|DecisionOps Platform White Paper Marketing Alignment                   |Internal Alignment    |Draft     |2.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Technical Alignment                   |Internal Alignment    |Draft     |2.1    |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Marketing Alignment                   |Internal Alignment    |Draft     |2.1    |corpus/08_strategy/positioning|
 |DecisionOps Reference Architecture White Paper                         |Reference Architecture|Draft     |1.0    |corpus/08_strategy/positioning|
 |DecisionOps Analyst Briefing Pack                                      |Analyst Briefing      |Draft     |1.0    |corpus/08_strategy/positioning|
 |Strategic Flag — AI Threat Intelligence Exchange Standard              |Strategic Flag        |Identified|0.1    |corpus/08_strategy/positioning|
@@ -528,6 +537,27 @@ Each catalogue entry must follow a strict five-column schema to ensure reliable 
 |Origin of the CLARITY Framework                                        |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
 |ARC and ARC+ Source and Evolution                                      |Working Document      |Draft     |1.0    |corpus/08_strategy/positioning|
 |Strategic Flag — PromptStudio Product, CLARITY, and Commercial Strategy|Strategic Flag        |Draft     |1.0    |corpus/08_strategy/positioning|
+|DecisionOps Platform White Paper Investor Alignment                    |Internal Alignment    |Draft     |1.0    |corpus/08_strategy/investor   |
+
+## 7.5 Intelligence and Operations
+
+### 7.5.1 External Intelligence
+
+|Document Name            |Type            |Status|Version|Repository Location          |
+|-------------------------|----------------|------|-------|-----------------------------|
+|External Intelligence Log|Working Document|Active|1.7    |corpus/04_intelligence/market|
+
+### 7.5.2 IBM watsonx.governance Q1 2026 Baseline (PR 2, 2026-05-22)
+
+|Document Name                                         |Type                |Status|Version|Repository Location                                          |
+|------------------------------------------------------|-------------------|------|-------|-------------------------------------------------------------|
+|watsonx.governance Competitive Assessment             |Intelligence Memo   |Active|1.0    |corpus/04_intelligence/market/2026-05-13-18-29-18_watsonx_governance_competitive_assessment.docx |
+|watsonx.governance Competitive Assessment Metadata    |Document Metadata   |Active|1.0    |corpus/04_intelligence/market/2026-05-13-18-29-18_watsonx_governance_competitive_assessment.docx.meta.yaml |
+|watsonx.governance Cost Baseline                      |Analysis Dataset    |Active|1.0    |corpus/04_intelligence/market/2026-05-14-09-00-00_watsonx_governance_cost_baseline.xlsx |
+|watsonx.governance Cost Baseline Metadata             |Document Metadata   |Active|1.0    |corpus/04_intelligence/market/2026-05-14-09-00-00_watsonx_governance_cost_baseline.xlsx.meta.yaml |
+|watsonx.governance Cost Baseline Notes and Methodology|Reference Notes     |Active|1.0    |corpus/04_intelligence/market/ibm_watsonx_governance_cost_baseline_notes_and_methodology.md |
+
+**Note:** Intelligence and marketing content areas (corpus/04_intelligence/, corpus/08_strategy/, corpus/09_sources/, corpus/10_branding_and_marketing/) are ungoVerned per PR 1 scope decision. These documents are reference material and not subject to governance schemas. Metadata is informational only.
 
 -----
 
